@@ -7,7 +7,7 @@ const pictureSchema = new mongoose.Schema({
     ref: 'User'
   }
   ,
-  picture: {
+  buffer: {
     type: Buffer
   }
 },{timestamps: true})

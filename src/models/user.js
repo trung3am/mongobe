@@ -34,12 +34,14 @@ const userSchema = new mongoose.Schema({
     }
   },
   pictures: [{
-    picture:{
-      _id: {
-        type: mongoose.Schema.Types.ObjectId,
-        required: true,
+    
+      name: {
+        type: String,
+        default: 'photo',
+        trim: true,
+        required: true
       }
-    }
+    
   }],
 
   
