@@ -42,6 +42,7 @@ router.patch('/users/me',auth, async (req,res)=>{
 
 router.post('/users', async (req,res)=>{  
   const user = new User(req.body)
+  user.avaurl = "https://robohash.org/" + req.name
   try {
     await user.save()
     const token = await user.generateAuthToken()
@@ -54,7 +55,7 @@ router.post('/users', async (req,res)=>{
 
 router.post('/users/login', async (req,res)=>{
   try {
-    console.log("go")
+    
     const user = await User.findByCredentials(req.body.email,req.body.password)
     const token = await user.generateAuthToken()
     
@@ -114,6 +115,7 @@ const upload = multer({
 router.post('/users/me/avatar', auth, upload.single('avatar'), async (req,res)=>{
   const buffer = await sharp(req.file.buffer).resize({width:150, height: 150}).png().toBuffer()
   req.user.avatar = buffer
+  req.user.avaurl = "http://localhost:3005/users/" + String(req.user._id) + "/avatar"
   await req.user.save()
   res.send()
 },(error,req,res,next)=>{
@@ -122,6 +124,7 @@ router.post('/users/me/avatar', auth, upload.single('avatar'), async (req,res)=>
 
 router.delete('/users/me/avatar',auth, async (req,res)=>{
   req.user.avatar = undefined
+  req.user.avaurl = "https://robohash.org/" + String(req.user._id)
   await req.user.save()
   res.send()
 },(error,req,res)=>{

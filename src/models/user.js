@@ -43,7 +43,10 @@ const userSchema = new mongoose.Schema({
       }
     
   }],
-
+  avaurl: {
+    type: String,
+    default: "https://robohash.org/trungtrung" 
+  },
   
   tokens: [{
     token: {
