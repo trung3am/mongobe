@@ -3,13 +3,13 @@ var express = require('express')
 require('./db/mongoose')
 var userRouter = require('./routers/user')
 var pictureRouter = require('./routers/picture')
-
+var messageRouter = require('./routers/message')
 var app = express()
 app.use(cors())
 
 var port = process.env.PORT || 3003
 app.use(express.json())
-
+app.use(messageRouter)
 app.use(userRouter)
 app.use(pictureRouter)
 
