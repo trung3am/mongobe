@@ -42,7 +42,7 @@ router.patch('/users/me',auth, async (req,res)=>{
 
 router.post('/users', async (req,res)=>{  
   const user = new User(req.body)
-  user.avaurl = "https://robohash.org/" + req.name
+  user.avaurl = "https://robohash.org/" + req.body.name
   try {
     await user.save()
     const token = await user.generateAuthToken()
