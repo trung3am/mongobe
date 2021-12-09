@@ -1,13 +1,15 @@
-const express = require('express')
+var cors = require('cors')
+var express = require('express')
 require('./db/mongoose')
+var userRouter = require('./routers/user')
+var pictureRouter = require('./routers/picture')
 
-const app = express()
-const port = process.env.PORT || 3003
-const userRouter = require('./routers/user')
+var app = express()
+app.use(cors())
 
-const pictureRouter = require('./routers/picture')
-
+var port = process.env.PORT || 3003
 app.use(express.json())
+
 app.use(userRouter)
 app.use(pictureRouter)
 
