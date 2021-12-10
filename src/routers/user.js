@@ -115,7 +115,7 @@ const upload = multer({
 router.post('/users/me/avatar', auth, upload.single('avatar'), async (req,res)=>{
   const buffer = await sharp(req.file.buffer).resize({width:150, height: 150}).png().toBuffer()
   req.user.avatar = buffer
-  req.user.avaurl = "http://localhost:3005/users/" + String(req.user._id) + "/avatar"
+  req.user.avaurl = "https://trung-mongodb-be.herokuapp.com/users/" + String(req.user._id) + "/avatar"
   await req.user.save()
   res.send()
 },(error,req,res,next)=>{
